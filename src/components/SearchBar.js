@@ -4,10 +4,6 @@ import nba from 'nba';
 
 window.nba = nba;
 
-function onSelect(value) {
-    console.log('onSelect', value);
-}
-
 export class SearchBar extends React.Component {
     state = {
         dataSource: [],
@@ -17,10 +13,12 @@ export class SearchBar extends React.Component {
         this.setState({
             dataSource: !value ? [] : nba.searchPlayers(value).map(({fullName}) => fullName),
         });
+        console.log(this.state.dataSource);
     }
 
     onSelect = (value) => {
         console.log('onSelect', value);
+        this.props.loadPlayerInfo(value);
     }
 
     render() {
